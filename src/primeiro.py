@@ -13,10 +13,10 @@ def validar_notas(notas, pesos):
     while executa == True and i < len(notas):
         if notas[i] < 0 or notas[i] > 10:
             executa = False
-            msg_erro = "Nota %d tem valor inválido" % (i+1)
+            msg_erro = "Nota %d tem valor inválido" % (i + 1)
         if pesos[i] <= 0:
             executa = False
-            msg_erro = msg_erro + "Peso %d tem valor inválido!" % (i+1)
+            msg_erro = msg_erro + "Peso %d tem valor inválido!" % (i + 1)
 
         i = i + 1
     return executa, msg_erro
@@ -36,8 +36,10 @@ def calcular_media(notas, pesos):
 
 def ler_notas(nro_notas):
     notas = []
+    #Quantidade de notas e armazenamento
+    #nro_notas = int(input("Quantas notas você deseja inserir?: "))
     for i in range(0, nro_notas):
-        nota = float(input())
+        nota = float(input("Insira a %dª nota: " % (i + 1)))
         notas.append(nota)
 
     return notas
@@ -46,30 +48,28 @@ def ler_notas(nro_notas):
 def ler_pesos(nro_pesos):
     pesos = []
     for i in range(0, nro_pesos):
-        peso = int(input())
+        peso = int(input("Insira o %dº peso: " % (i + 1)))
         pesos.append(peso)
 
     return pesos
 
 
 def main():
-    nro_alunos = int(input())
-    nro_notas = int(input())
-    nro_pesos = nro_notas
+    nro_alunos = int(input("Insira a quantidade de alunos: "))
 
-    pesos = ler_pesos(nro_pesos)
-    # while nro_alunos > 0 :
     for i in range(0, nro_alunos):
+        nro_notas = int(input("Insira o número de notas para o %dº aluno: " % (i + 1)))
+        pesos = ler_pesos(nro_notas)
         notas = ler_notas(nro_notas)
+
         executa, msg_erro = validar_notas(notas, pesos)
+
         if executa:
             media = calcular_media(notas, pesos)
-            print("%.2f" % media)
+            print("Média do %dº aluno: %.2f" % (i + 1, media))
         else:
             print("Entrada de dados inválida!")
             print(msg_erro)
-
-    #    nro_alunos = nro_alunos - 1
 
 
 if __name__ == "__main__":
